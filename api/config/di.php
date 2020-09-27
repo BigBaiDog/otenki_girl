@@ -30,7 +30,7 @@ $di->logger = FileLogger::create($di->config->get('sys.file_logger'));
 $di->notorm = new NotORMDatabase($di->config->get('dbs'), $di->config->get('sys.notorm_debug'));
 
 // JSON中文输出
-// $di->response = new \PhalApi\Response\JsonResponse(JSON_UNESCAPED_UNICODE);
+$di->response = new \PhalApi\Response\JsonResponse(JSON_UNESCAPED_UNICODE);
 
 // 错误处理
 $di->error = new ApiError();
@@ -69,3 +69,11 @@ foreach (glob(API_ROOT . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR .
 // $di->tracer = function() {
 //     return new \App\Common\Tracer();
 // };
+
+// 允许跨域
+$response = \PhalApi\DI()->response;
+$response->addHeaders('Access-Control-Allow-Origin', '*'); // *代表允许任何网址请求
+// $response->addHeaders('Access-Control-Allow-Origin', 'www.phalapi.net'); // 推荐指定网站
+$response->addHeaders('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,DELETE,PUT'); // 允许请求的类型
+$response->addHeaders('Access-Control-Allow-Credentials', 'true'); // 设置是否允许发送 cookies
+$response->addHeaders('Access-Control-Allow-Headers', 'Content-Type,Content-Length,Accept-Encoding,X-Requested-with, Origin'); // 设置允许自定义请求头的字段

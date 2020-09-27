@@ -26,7 +26,7 @@ return array(
     /**
      * @var boolean 是否开启URI匹配，若未提供service（或s）参数且开启enable_uri_match才尝试进行URI路由匹配。例如：/App/User/Login映射到s=App.Usre.Login
      */
-    'enable_uri_match' => false,
+    'enable_uri_match' => true,
 
     /**
      * MC缓存服务器参考配置

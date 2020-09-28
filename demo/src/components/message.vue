@@ -15,29 +15,30 @@
 </template>
 
 <script>
-// import axios from 'axios'
 
 export default {
   name: "message",
   data() {
-      return {
-        prayers:[{
-          id: '',
-          name: '',
-          date: '',
-          address: '',
-          reason: '',
-          time: ''
-          }]
+    return {
+      prayers: {
+        id: '',
+        name: '',
+        date: '',
+        address: '',
+        reason: '',
+        time: ''
       }
+    }
   },
+  
+  mounted () {
+    this.axios
+      .get(this.serverSrc+'Prayer/TableList')
+      .then(response => (this.prayers = response.data.data.items))
+  },
+
   methods: {
     
-  },
-  mounted () {
-    this.$axios
-      .get('http://127.0.0.1:8083/Prayer/TableList')
-      .then(response => (this.prayers = response.data.data.items))
   }
 };
 </script>

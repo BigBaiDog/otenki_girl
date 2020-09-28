@@ -6,7 +6,7 @@ import './plugins/bootstrap-vue'
 import App from './App.vue'
 
 Vue.config.productionTip = false
-Vue.prototype.$serverSrc = 'http://127.0.0.1:8083/'
+Vue.prototype.serverSrc = 'http://127.0.0.1:8083/'
 
 new Vue({
   render: h => h(App),

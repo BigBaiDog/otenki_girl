@@ -15,7 +15,6 @@
 </template>
 
 <script>
-
 export default {
   name: "message",
   data() {
@@ -32,13 +31,15 @@ export default {
   },
   
   mounted () {
-    this.axios
-      .get(this.serverSrc+'Prayer/TableList')
-      .then(response => (this.prayers = response.data.data.items))
+    this.load()
   },
 
   methods: {
-    
+    load: function () {
+      this.axios
+      .get(this.serverSrc+'Prayer/TableList')
+      .then(response => (this.prayers = response.data.data.items))
+    }
   }
 };
 </script>

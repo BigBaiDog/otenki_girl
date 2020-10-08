@@ -4,6 +4,12 @@ use PhalApi\Api\DataApi as Api;
 
 class Prayer extends Api{
 
+    // public function index() {
+    //     return array(
+    //         'title' => 'Hello ' 
+    //     );
+    // }
+
     protected function userCheck() {
         // TODO 记得要进行验证
     }
@@ -27,5 +33,10 @@ class Prayer extends Api{
         $newData['time'] = date('Y-m-d H:i:s');
         $newData['id'] = md5($newData['time']);
         return $newData;
+    }
+
+    // 列表的默认排序
+    protected function getTableListOrder() {
+        return 'time DESC';
     }
 }

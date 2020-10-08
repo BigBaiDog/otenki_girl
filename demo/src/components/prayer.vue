@@ -1,7 +1,7 @@
 <template>
   <div id="prayer">
     <b-container>
-      <!-- <b-img src="../assets/compute.png" fluid></b-img> -->
+      <b-img src="../assets/compute.png" fluid></b-img>
     </b-container>
     <b-card style="max-width: 20rem;">
         <b-card-title>￥3,400<span>（含税）</span></b-card-title>
@@ -23,18 +23,17 @@
         </b-form>
     </b-card>
 
-<div id="message">
-    留言区
-    <ul id="v-for-object" class="demo">
-  <li v-for="value in prayers" :key="value.id">
-    {{ value.name }}
-    {{ value.date }}
-    {{ value.address }}
-    {{ value.reason }}
-    {{ value.time }}
-  </li>
-</ul>
-</div>
+    <div id="message">留言区
+      <ul id="v-for-object" class="demo">
+        <li v-for="value in prayers" :key="value.id">
+          {{ value.name }}
+          {{ value.date }}
+          {{ value.address }}
+          {{ value.reason }}
+          {{ value.time }}
+        </li>
+      </ul>
+    </div>
 
   </div>
 </template>
@@ -60,20 +59,17 @@ export default {
       }
     }
   },
-  mounted () {
-    this.load()
-  },
   methods: {
-    load: function () {
-      this.axios
-        .get(this.serverSrc+'Prayer/TableList')
+    load: async function () {
+      await this.$http
+        .get('Prayer/TableList')
         .then(response => (
           this.prayers = response.data.data.items
         ))
     },
     sub: function () {
-      this.axios
-        .post(this.serverSrc+'Prayer/CreateData',{
+      this.$http
+        .post('Prayer/CreateData',{
           newData: this.newData
         })
         .then(response => (
@@ -81,5 +77,8 @@ export default {
         ))
     }
   },
-};
+  mounted () {
+    this.load()
+  },
+}
 </script>
